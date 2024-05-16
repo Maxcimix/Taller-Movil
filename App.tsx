@@ -16,7 +16,6 @@ import VentaState from './context/ventas/ventaState';
 import FirebaseState from './context/firebase/firebaseState';
 import ScreenCreateUser from './src/Screens/ScreenCreateUser';
 
-
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
