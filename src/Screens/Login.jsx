@@ -6,12 +6,32 @@ import {
   View,
   Text,
   TextInput,
+  Alert,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
+import firebase from '../../firebase/firebase';
+import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
+//johan@hotmail.com
+//123456
+const auth = getAuth(firebase);
 
+export default function Login(props) {
+  //Creamos la variable estado
+  const [email, setEmail] = useState();
+  const [Password, setPassword] = useState();
 
-export default function Login() {
+  const logueo = async () => {
+    try {
+      await signInWithEmailAndPassword(auth, email, Password);
+      Alert.alert('Iniciando sesion','Accediendo...')
+      props.navigation.navigate('Home')
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Error','Correo o contraseña incorrectas')
+    }
+  };
+
   const navigation = useNavigation();
   return (
     <View style={styles.padre}>
@@ -26,14 +46,22 @@ export default function Login() {
           <TextInput
             placeholder="correo@gmail.com"
             style={{paddingHorizontal: 15}}
+            keyboardType="email-address"
+            onChangeText={(text)=>setEmail(text)}
           />
         </View>
         <View style={styles.cajaTexto}>
-          <TextInput placeholder="Password" style={{paddingHorizontal: 15}} />
+          <TextInput
+            placeholder="Password"
+            style={{paddingHorizontal: 15}}
+            secureTextEntry={true}
+            maxLength={8}
+            onChangeText={(text)=>setPassword(text)}
+          />
         </View>
 
         <View style={styles.padreBoton}>
-          <TouchableOpacity style={styles.cajaBoton}>
+          <TouchableOpacity style={styles.cajaBoton} onPress={logueo}>
             <Text style={styles.textoBoton}>Sign In</Text>
           </TouchableOpacity>
         </View>
