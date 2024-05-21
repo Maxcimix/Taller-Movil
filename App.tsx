@@ -11,10 +11,11 @@ import Home from './src/Screens/Home';
 import Catalog from './src/Screens/Catalog';
 import men from './src/Screens/Menu';
 import ScreenTestDrive from './src/Screens/ScreenTestDrive';
-import FirebaseContext from './context/firebase/firebaseContext';
 import VentaState from './context/ventas/ventaState';
 import FirebaseState from './context/firebase/firebaseState';
 import ScreenCreateUser from './src/Screens/ScreenCreateUser';
+
+
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -71,7 +72,7 @@ function MyTab() {
           headerStyle: {backgroundColor: '#525FE1'},
           tabBarLabel: 'Menu',
           tabBarIcon: ({color, size}) => (
-            <Icon name=" " size={size} color={color} />
+            <Icon name="menu" size={size} color={color} />
           ),
         }}
       />

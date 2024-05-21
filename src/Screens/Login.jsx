@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   Image,
   StyleSheet,
@@ -8,27 +8,23 @@ import {
   TextInput,
   Alert,
 } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
-import firebase from '../../firebase/firebase';
-import {getAuth, signInWithEmailAndPassword} from 'firebase/auth';
-//johan@hotmail.com
-//123456
-const auth = getAuth(firebase);
+import firebase from '../../firebase'; // Asegúrate de importar firebase desde index.js
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
 export default function Login(props) {
-  //Creamos la variable estado
-  const [email, setEmail] = useState();
-  const [Password, setPassword] = useState();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const logueo = async () => {
     try {
-      await signInWithEmailAndPassword(auth, email, Password);
-      Alert.alert('Iniciando sesion','Accediendo...')
-      props.navigation.navigate('Home')
+      await signInWithEmailAndPassword(firebase.auth, email, password); // Usa firebase.auth
+      Alert.alert('Iniciando sesion', 'Accediendo...');
+      props.navigation.navigate('Home');
     } catch (error) {
       console.log(error);
-      Alert.alert('Error','Correo o contraseña incorrectas')
+      Alert.alert('Error', 'Correo o contraseña incorrectas');
     }
   };
 
@@ -45,21 +41,20 @@ export default function Login(props) {
         <View style={styles.cajaTexto}>
           <TextInput
             placeholder="correo@gmail.com"
-            style={{paddingHorizontal: 15}}
+            style={{ paddingHorizontal: 15 }}
             keyboardType="email-address"
-            onChangeText={(text)=>setEmail(text)}
+            onChangeText={(text) => setEmail(text)}
           />
         </View>
         <View style={styles.cajaTexto}>
           <TextInput
             placeholder="Password"
-            style={{paddingHorizontal: 15}}
+            style={{ paddingHorizontal: 15 }}
             secureTextEntry={true}
             maxLength={8}
-            onChangeText={(text)=>setPassword(text)}
+            onChangeText={(text) => setPassword(text)}
           />
         </View>
-
         <View style={styles.padreBoton}>
           <TouchableOpacity style={styles.cajaBoton} onPress={logueo}>
             <Text style={styles.textoBoton}>Sign In</Text>
@@ -68,7 +63,8 @@ export default function Login(props) {
         <View style={styles.CreateBoton}>
           <TouchableOpacity
             onPress={() => navigation.navigate('ScreenCreateUser')}
-            style={styles.CreatecajaBoton}>
+            style={styles.CreatecajaBoton}
+          >
             <Text style={styles.textoBoton}>Create User</Text>
           </TouchableOpacity>
         </View>
@@ -78,7 +74,7 @@ export default function Login(props) {
 }
 
 const styles = StyleSheet.create({
-  CreateBoton: {alignItems: 'center'},
+  CreateBoton: { alignItems: 'center' },
   CreatecajaBoton: {
     backgroundColor: '#525FE1',
     borderRadius: 20,
@@ -100,12 +96,12 @@ const styles = StyleSheet.create({
   },
   tarjeta: {
     margin: 20,
-    backgroundColor: 'while',
+    backgroundColor: 'white',
     borderRadius: 20,
     width: '90%',
     padding: 20,
     shadowColor: '#000',
-    shadowOffset: {while: 0, height: 2},
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.25,
     shadowRadius: 4,
     elevation: 5,
@@ -116,7 +112,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     marginVertical: 10,
   },
-  padreBoton: {alignItems: 'center'},
+  padreBoton: { alignItems: 'center' },
   cajaBoton: {
     backgroundColor: '#525FE1',
     borderRadius: 30,
@@ -124,5 +120,5 @@ const styles = StyleSheet.create({
     width: 150,
     marginTop: 20,
   },
-  textoBoton: {textAlign: 'center', color: 'while'},
+  textoBoton: { textAlign: 'center', color: 'white' },
 });

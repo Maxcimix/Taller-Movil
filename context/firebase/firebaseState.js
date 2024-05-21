@@ -6,8 +6,7 @@ import _ from 'lodash';
 import {OBTENER_VEHICLE_EXITO} from '../../type';
 
 //Screens
-import Catalog from '../../src/Screens/Catalog';
-import men from '../../src/Screens/Menu';
+
 
 const FirebaseState = props => {
   // Crear el estado inicial
